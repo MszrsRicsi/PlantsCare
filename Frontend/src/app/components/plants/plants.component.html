@@ -1,0 +1,66 @@
+<h2>Plants Management</h2>
+
+<button type="button" class="btn btn-primary" (click)="enableEditing()" *ngIf="!isEditing">Add new plant</button>
+
+<h4 class="mb-3" *ngIf="!isEditing">Plant list</h4>
+
+<table class="table" *ngIf="!isEditing">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Species</th>
+        <th scope="col">Watering intervals</th>
+        <th scope="col">Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let plant of plants">
+        <td>{{plant.id}}</td>
+        <td>{{plant.name}}</td>
+        <td>{{plant.species}}</td>
+        <td>{{plant.water_interval_days}} days</td>
+        <td>
+            <button type="button" class="btn btn-warning" (click)="enableModifying(plant.id)">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="deletePlant(plant.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+
+<div *ngIf="isEditing">
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="plantname" placeholder="" [(ngModel)]="newPlant.name">
+    <label for="plantname">Plant's name</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="plantspecie" placeholder="" [(ngModel)]="newPlant.species">
+    <label for="plantspecie">Plant's specie</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="plantwaterintervals" placeholder="" [(ngModel)]="newPlant.water_interval_days">
+    <label for="plantwaterintervals">Watering interval days</label>
+  </div>
+  
+  <button type="button" class="btn btn-primary m-1" (click)="addPlant()">Save plant</button>
+  <button type="button" class="btn btn-secondary" (click)="disableEditing()">Back to plants list</button>
+</div>
+
+<div *ngIf="isModifying">
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="plantname" placeholder="" [(ngModel)]="newPlant.name">
+    <label for="plantname">Plant's name</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="plantspecie" placeholder="" [(ngModel)]="newPlant.species">
+    <label for="plantspecie">Plant's specie</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="plantwaterintervals" placeholder="" [(ngModel)]="newPlant.water_interval_days">
+    <label for="plantwaterintervals">Watering interval days</label>
+  </div>
+  
+  <button type="button" class="btn btn-primary m-1" (click)="updatePlant()">Save plant</button>
+  <button type="button" class="btn btn-secondary" (click)="disableModifying()">Back to plants list</button>
+</div>

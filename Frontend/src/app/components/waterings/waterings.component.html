@@ -1,0 +1,51 @@
+<h2>Waterings Management</h2>
+
+<select class="form-select form-select-lg mb-3" id="plantSelect" (change)="getWateringData()">
+    <option selected>Select plant</option>
+    <option value="{{plant.id}}" *ngFor="let plant of plants">{{plant.name}}</option>
+</select>
+
+<h4 class="mb-3">Watering logs</h4>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Watering date</th>
+        <th scope="col">Water amount</th>
+        <th scope="col">Notes</th>
+        <th scope="col">Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let watering of waterings">
+        <td>{{watering.id}}</td>
+        <td>{{watering.date_watered}}</td>
+        <td>{{watering.amount_ml}} ml</td>
+        <td>{{watering.notes}}</td>
+        <td>
+            <button type="button" class="btn btn-warning">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+
+<div *ngIf="isWatering">
+  <div class="form-floating mb-3">
+    <input type="date" class="form-control" id="date" placeholder="" [(ngModel)]="plant.date_watered">
+    <label for="date">Date</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="amount" placeholder="" [(ngModel)]="plant.amount_ml">
+    <label for="plantspecie">Water amount (ml)</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="notes" placeholder="" [(ngModel)]="plant.notes">
+    <label for="notes">Notes</label>
+  </div>
+  
+  <button type="button" class="btn btn-primary m-1" (click)="addWatering()">Save watering</button>
+  <button type="button" class="btn btn-secondary">Back to watering logs</button>
+</div>
